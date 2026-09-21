@@ -1,0 +1,31 @@
+{
+  "name": "hirestella-ai",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Document-agnostic grounded RAG system for technical assessment",
+
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "ingest": "tsx --tsconfig tsconfig.scripts.json scripts/ingest.ts",
+    "validate": "tsx --tsconfig tsconfig.scripts.json scripts/validate.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@google/genai": "^2.23.0",
+    "dotenv": "^16.6.1",
+    "next": "^16.3.5",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "tsx": "^4.23.15"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.2",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "typescript": "^7.0.2"
+  }
+}
