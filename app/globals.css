@@ -1153,13 +1153,18 @@ button {
     font-size: 0.875rem;
   }
   .chat-panel {
-    bottom: 12px;
-    right: 12px;
-    left: 12px;
+    bottom: 8px;
+    right: 8px;
+    left: 8px;
     width: auto;
     max-width: none;
-    height: calc(100vh - 24px);
-    max-height: calc(100vh - 24px);
+    height: calc(100vh - 16px);
+    height: calc(100dvh - 16px);
+    max-height: calc(100vh - 16px);
+    max-height: calc(100dvh - 16px);
     border-radius: var(--radius-lg);
+  }
+  .chat-input {
+    font-size: 16px; /* Prevents iOS Safari from auto-zooming on focus */
   }
 }

@@ -1,4 +1,4 @@
-# Grounded RAG Portfolio — Afnan PK
+# RAG Portfolio — Afnan PK
 
 A document-agnostic Retrieval-Augmented Generation (RAG) system and portfolio assistant built for the **HireStella AI Developer Assessment**.
 
