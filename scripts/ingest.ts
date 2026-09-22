@@ -23,11 +23,11 @@ import { config } from "dotenv";
 config({ path: ".env.local" });
 
 import path from "path";
-import { loadDocuments } from "@/lib/documents/loader.js";
-import { chunkDocuments } from "@/lib/documents/chunker.js";
-import { createEmbeddingProvider } from "@/lib/embeddings/gemini.js";
-import { writeVectorStore, validateVectorStore, readVectorStore } from "@/lib/retrieval/store.js";
-import type { EmbeddedChunk } from "@/lib/types.js";
+import { loadDocuments } from "@/lib/documents/loader";
+import { chunkDocuments } from "@/lib/documents/chunker";
+import { createEmbeddingProvider } from "@/lib/embeddings/gemini";
+import { writeVectorStore, validateVectorStore, readVectorStore } from "@/lib/retrieval/store";
+import type { EmbeddedChunk } from "@/lib/types";
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -49,7 +49,7 @@ async function ingest(): Promise<void> {
   // Step 1: Load documents
   // ------------------------------------------------------------------
   console.log("📂 Step 1: Loading documents...");
-  const documents = loadDocuments();
+  const documents = await loadDocuments();
   console.log(`   ✅ Loaded ${pluralise(documents.length, "document")}:`);
   for (const doc of documents) {
     console.log(

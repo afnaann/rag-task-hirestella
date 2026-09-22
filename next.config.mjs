@@ -1,9 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Ensure @google/genai (ESM-only) is never bundled for the browser.
-  // It is only used in server-side code (API routes, scripts).
-  serverExternalPackages: ["@google/genai"],
+  // Ensure server-only SDKs (ESM-only or native Node dependencies) are never
+  // bundled for the browser. They are only used in API routes and scripts.
+  serverExternalPackages: ["@google/genai", "groq-sdk", "pdf-parse"],
 };
 
 export default nextConfig;
-

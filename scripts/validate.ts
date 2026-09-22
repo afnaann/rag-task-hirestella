@@ -23,7 +23,7 @@
  */
 
 import path from "path";
-import { readVectorStore, validateVectorStore } from "@/lib/retrieval/store.js";
+import { readVectorStore, validateVectorStore } from "@/lib/retrieval/store";
 
 function section(title: string) {
   console.log(`\n${"─".repeat(50)}`);

@@ -13,9 +13,9 @@
  * A raw document loaded from the documents directory.
  */
 export interface Document {
-  /** Derived deterministically from the filename (e.g. "dummy-profile" from "dummy-profile.md"). */
+  /** Derived deterministically from the filename (e.g. "project-wiral-ai" from "project-wiral-ai.md"). */
   readonly id: string;
-  /** Original filename including extension (e.g. "dummy-profile.md"). */
+  /** Original filename including extension (e.g. "project-wiral-ai.md"). */
   readonly name: string;
   /** Full raw text content of the file. */
   readonly content: string;
@@ -30,7 +30,7 @@ export interface Document {
  * Chunks are the unit of retrieval in the RAG pipeline.
  */
 export interface Chunk {
-  /** Deterministic ID combining documentId and chunk index (e.g. "dummy-profile-003"). */
+  /** Deterministic ID combining documentId and chunk index (e.g. "project-wiral-ai-003"). */
   readonly chunkId: string;
   /** ID of the parent document. */
   readonly documentId: string;
@@ -80,3 +80,118 @@ export interface VectorStore {
   /** All embedded chunks. */
   readonly chunks: EmbeddedChunk[];
 }
+
+// ---------------------------------------------------------------------------
+// Retrieval
+// ---------------------------------------------------------------------------
+
+/**
+ * A chunk returned by the retrieval layer, augmented with its similarity score.
+ * The embedding vector is deliberately stripped — it is not needed downstream
+ * and excluding it keeps the retrieved payload small.
+ */
+export interface RetrievedChunk {
+  readonly chunkId: string;
+  readonly documentId: string;
+  readonly documentName: string;
+  readonly heading?: string;
+  readonly content: string;
+  /** Cosine similarity score in [-1, 1]. Higher = more relevant. */
+  readonly score: number;
+}
+
+/**
+ * The complete result returned by the retrieve() function.
+ *
+ * Designed to make debugging straightforward:
+ *   - `hasEvidence` answers "should we call the LLM?"
+ *   - `retrieved` contains the chunks to use as LLM context
+ *   - `diagnostics` explains why this result was produced
+ *
+ * The LLM is only called when hasEvidence === true.
+ */
+export interface RetrievalResult {
+  /** The original query string. */
+  readonly query: string;
+
+  /**
+   * Whether enough evidence was found to attempt an answer.
+   * false  → deterministic refusal, no LLM call needed.
+   * true   → pass `retrieved` chunks to the LLM as context.
+   */
+  readonly hasEvidence: boolean;
+
+  /**
+   * Chunks that passed the similarity threshold, sorted by score descending.
+   * Empty when hasEvidence is false.
+   */
+  readonly retrieved: RetrievedChunk[];
+
+  /**
+   * Diagnostic information about the retrieval process.
+   * Exposed here (not just in logs) so the API route can log it server-side
+   * and the test script can print it.
+   */
+  readonly diagnostics: RetrievalDiagnostics;
+}
+
+/**
+ * Internal diagnostics attached to every retrieval result.
+ * Useful for understanding score distributions during threshold calibration.
+ */
+export interface RetrievalDiagnostics {
+  /** Total number of chunks compared (= full store size). */
+  readonly candidateCount: number;
+  /** Number of chunks returned after threshold + topK filtering. */
+  readonly returnedCount: number;
+  /** Similarity score of the best-matching chunk (null if store is empty). */
+  readonly maxScore: number | null;
+  /** Similarity score of the second-best chunk (null if fewer than 2 candidates). */
+  readonly secondScore: number | null;
+  /** Similarity threshold applied. */
+  readonly thresholdUsed: number;
+  /** Maximum chunks requested (topK). */
+  readonly topK: number;
+  /** Dimensionality of the query embedding. */
+  readonly queryEmbeddingDimension: number;
+}
+
+// ---------------------------------------------------------------------------
+// API (Phase 3)
+// ---------------------------------------------------------------------------
+
+/**
+ * Source metadata returned in the API response.
+ * Contains everything Phase 4 needs to render a citation.
+ */
+export interface SourceMetadata {
+  readonly chunkId: string;
+  readonly documentName: string;
+  readonly heading?: string;
+  readonly score: number;
+}
+
+/**
+ * The JSON body expected by POST /api/chat.
+ */
+export interface ChatRequest {
+  readonly message: string;
+}
+
+/**
+ * The JSON body returned by POST /api/chat.
+ *
+ * - `answer`:   The grounded response (or deterministic refusal text)
+ * - `sources`:  Retrieved chunks that grounded the answer (empty on refusal)
+ * - `grounded`: Always true — signals that this is a RAG response
+ * - `refused`:  true when the retrieval gate fired (no evidence found)
+ * - `provider`: Which LLM provider generated the answer (null on refusal)
+ */
+export interface ChatResponse {
+  readonly answer: string;
+  readonly sources: SourceMetadata[];
+  readonly grounded: true;
+  readonly refused: boolean;
+  readonly provider: "groq" | "gemini" | null;
+}
+

@@ -15,8 +15,8 @@
  */
 
 import { GoogleGenAI } from "@google/genai";
-import { EMBEDDING_MODEL, EMBEDDING_DIMENSIONS } from "@/lib/config.js";
-import type { EmbeddingProvider } from "./types.js";
+import { EMBEDDING_MODEL, EMBEDDING_DIMENSIONS } from "@/lib/config";
+import type { EmbeddingProvider } from "./types";
 
 /**
  * How many texts to embed in a single API call.

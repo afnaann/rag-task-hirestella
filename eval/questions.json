@@ -1,0 +1,201 @@
+[
+  {
+    "id": "E01",
+    "name": "Supported technical skill (MCP)",
+    "category": "supported",
+    "question": "Does Afnan have experience with MCP?",
+    "expectedBehavior": "direct_positive",
+    "expectedFacts": [
+      ["mcp", "model context protocol"]
+    ],
+    "forbiddenPatterns": [
+      "source 1",
+      "source 2",
+      "according to",
+      "based on the",
+      "i don't have information",
+      "cannot confirm",
+      "documents do not",
+      "provided context"
+    ],
+    "notes": "Direct positive answer confirming hands-on MCP experience."
+  },
+  {
+    "id": "E02",
+    "name": "Supported RAG experience",
+    "category": "supported",
+    "question": "Does Afnan have experience with RAG?",
+    "expectedBehavior": "direct_positive",
+    "expectedFacts": [
+      ["rag", "retrieval-augmented generation", "retrieval augmented generation"],
+      ["qdrant", "hybrid retrieval", "pipeline", "embeddings", "vector"]
+    ],
+    "forbiddenPatterns": [
+      "source 1",
+      "source 2",
+      "according to",
+      "based on the",
+      "i don't have information",
+      "cannot confirm",
+      "documents do not",
+      "provided context"
+    ],
+    "notes": "Direct positive answer describing production RAG implementations."
+  },
+  {
+    "id": "E03",
+    "name": "Supported project question (LangGraph)",
+    "category": "supported",
+    "question": "What has Afnan built with LangGraph?",
+    "expectedBehavior": "answer",
+    "expectedFacts": [
+      ["wiral", "customer-engagement", "customer engagement", "platform"],
+      ["multi-agent", "agent", "multi agent", "graph"]
+    ],
+    "forbiddenPatterns": [
+      "source 1",
+      "source 2",
+      "according to",
+      "based on the",
+      "i don't have information",
+      "cannot confirm",
+      "documents do not",
+      "provided context"
+    ],
+    "notes": "Answer describing Wiral AI multi-agent platform using LangGraph."
+  },
+  {
+    "id": "E04",
+    "name": "Supported data engineering question (Airflow ETL)",
+    "category": "supported",
+    "question": "What did Afnan do with Apache Airflow at WebMavericks?",
+    "expectedBehavior": "answer",
+    "expectedFacts": [
+      ["pipeline", "pipelines", "etl"],
+      ["redshift", "s3", "50"]
+    ],
+    "forbiddenPatterns": [
+      "source 1",
+      "source 2",
+      "according to",
+      "based on the",
+      "i don't have information",
+      "cannot confirm",
+      "documents do not",
+      "provided context"
+    ],
+    "notes": "Answer describing 50+ Airflow ETL pipelines integrating S3 and Redshift."
+  },
+  {
+    "id": "E05",
+    "name": "Direct negative skill question (Canva)",
+    "category": "direct_negative",
+    "question": "Does Afnan have experience with Canva?",
+    "expectedBehavior": "direct_negative",
+    "expectedPatterns": [
+      "no",
+      "canva"
+    ],
+    "forbiddenPatterns": [
+      "i don't have information",
+      "cannot confirm",
+      "documents do not",
+      "provided context",
+      "source 1",
+      "according to"
+    ],
+    "notes": "Direct negative answer stating Afnan does not have Canva experience."
+  },
+  {
+    "id": "E06",
+    "name": "Direct negative employment question (Google)",
+    "category": "direct_negative",
+    "question": "Did Afnan work at Google?",
+    "expectedBehavior": "direct_negative",
+    "expectedPatterns": [
+      "no",
+      "google"
+    ],
+    "forbiddenPatterns": [
+      "i don't have information",
+      "cannot confirm",
+      "documents do not",
+      "provided context",
+      "source 1",
+      "according to"
+    ],
+    "notes": "Direct negative answer stating Afnan did not work at Google."
+  },
+  {
+    "id": "E07",
+    "name": "Unsupported preference / hallucination trap",
+    "category": "hallucination_trap",
+    "question": "What is Afnan's favorite programming language?",
+    "expectedBehavior": "undocumented_preference",
+    "expectedPatterns": [
+      "favorite"
+    ],
+    "forbiddenPatterns": [
+      "favorite language is python",
+      "python is his favorite",
+      "source 1",
+      "according to",
+      "provided context"
+    ],
+    "notes": "Must not fabricate a favorite programming language."
+  },
+  {
+    "id": "E08",
+    "name": "Mixed supported + unsupported (Python & Canva)",
+    "category": "mixed",
+    "question": "Does Afnan have experience with Python and Canva?",
+    "expectedBehavior": "mixed",
+    "expectedFacts": [
+      ["python"],
+      ["canva"]
+    ],
+    "forbiddenPatterns": [
+      "source 1",
+      "source 2",
+      "according to",
+      "i don't have information",
+      "cannot confirm",
+      "documents do not"
+    ],
+    "notes": "Independently affirms Python experience and negates Canva experience."
+  },
+  {
+    "id": "E09",
+    "name": "Off-domain query (Sourdough bread)",
+    "category": "deterministic_scope",
+    "question": "How do I bake sourdough?",
+    "expectedBehavior": "deterministic_scope",
+    "expectedPatterns": [
+      "I can help with questions about Afnan's experience",
+      "What would you like to know?"
+    ],
+    "forbiddenPatterns": [
+      "flour",
+      "yeast",
+      "dough",
+      "oven"
+    ],
+    "notes": "Deterministic no-evidence redirect without calling the LLM."
+  },
+  {
+    "id": "E10",
+    "name": "Greeting query (Hi)",
+    "category": "deterministic_scope",
+    "question": "Hi",
+    "expectedBehavior": "deterministic_scope",
+    "expectedPatterns": [
+      "I can help with questions about Afnan's experience",
+      "What would you like to know?"
+    ],
+    "forbiddenPatterns": [
+      "source 1",
+      "according to"
+    ],
+    "notes": "Greeting naturally enters no-evidence gate without hardcoded detection."
+  }
+]

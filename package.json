@@ -3,13 +3,16 @@
   "version": "1.0.0",
   "type": "module",
   "description": "Document-agnostic grounded RAG system for technical assessment",
-
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "ingest": "tsx --tsconfig tsconfig.scripts.json scripts/ingest.ts",
-    "validate": "tsx --tsconfig tsconfig.scripts.json scripts/validate.ts"
+    "validate": "tsx --tsconfig tsconfig.scripts.json scripts/validate.ts",
+    "test:retrieval": "tsx --tsconfig tsconfig.scripts.json scripts/test-retrieval.ts",
+    "test:chat": "tsx --tsconfig tsconfig.scripts.json scripts/test-chat.ts",
+    "test:eval": "tsx --tsconfig tsconfig.scripts.json scripts/test-eval.ts",
+    "dev:force-fallback": "LLM_FORCE_PRIMARY_FAILURE=true next dev"
   },
   "keywords": [],
   "author": "",
@@ -17,13 +20,16 @@
   "dependencies": {
     "@google/genai": "^2.23.0",
     "dotenv": "^16.6.1",
+    "groq-sdk": "^1.6.0",
     "next": "^16.3.5",
+    "pdf-parse": "^2.4.5",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
     "tsx": "^4.23.15"
   },
   "devDependencies": {
     "@types/node": "^26.6.2",
+    "@types/pdf-parse": "^1.1.5",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "typescript": "^7.0.2"

@@ -12,8 +12,8 @@
 
 import fs from "fs";
 import path from "path";
-import { VECTOR_STORE_PATH, VECTOR_STORE_VERSION } from "@/lib/config.js";
-import type { EmbeddedChunk, VectorStore } from "@/lib/types.js";
+import { VECTOR_STORE_PATH, VECTOR_STORE_VERSION } from "@/lib/config";
+import type { EmbeddedChunk, VectorStore } from "@/lib/types";
 
 // ---------------------------------------------------------------------------
 // Write
@@ -32,7 +32,7 @@ export function writeVectorStore(
   dimensions: number,
   documentCount: number
 ): void {
-  const outPath = path.resolve(process.cwd(), VECTOR_STORE_PATH);
+  const outPath = path.join(process.cwd(), "data", "vector-store.json");
   const outDir = path.dirname(outPath);
 
   // Ensure the output directory exists
@@ -66,7 +66,7 @@ export function writeVectorStore(
  * @throws If the file is missing, unparseable, or has an incompatible version/dimensions.
  */
 export function readVectorStore(): VectorStore {
-  const storePath = path.resolve(process.cwd(), VECTOR_STORE_PATH);
+  const storePath = path.join(process.cwd(), "data", "vector-store.json");
 
   if (!fs.existsSync(storePath)) {
     throw new Error(

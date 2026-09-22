@@ -15,8 +15,8 @@ import {
   MAX_CHUNK_CHARS,
   MIN_CHUNK_CHARS,
   CHUNK_OVERLAP_CHARS,
-} from "@/lib/config.js";
-import type { Chunk, Document } from "@/lib/types.js";
+} from "@/lib/config";
+import type { Chunk, Document } from "@/lib/types";
 
 // ---------------------------------------------------------------------------
 // Internal helpers
