@@ -150,9 +150,9 @@ export async function retrieve(
   if (queryEmbedding.length !== storeDimensions) {
     throw new Error(
       `Embedding dimension mismatch: query embedding has ${queryEmbedding.length} dimensions ` +
-        `but the vector store expects ${storeDimensions}. ` +
-        `The query may have been embedded with a different model than the stored chunks. ` +
-        `Re-run "npm run ingest" to rebuild the vector store.`
+      `but the vector store expects ${storeDimensions}. ` +
+      `The query may have been embedded with a different model than the stored chunks. ` +
+      `Re-run "npm run ingest" to rebuild the vector store.`
     );
   }
 

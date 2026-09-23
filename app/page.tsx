@@ -70,13 +70,6 @@ const PROJECTS = [
       "50+ Apache Airflow ETL pipelines processing data from Facebook, TikTok, Google Ads, e-commerce, and support platforms into AWS S3 and Redshift with LLM-assisted data cleaning.",
     stack: ["Python", "Airflow", "AWS S3", "Redshift", "Docker", "PostgreSQL"],
   },
-  {
-    title: "Grounded RAG Portfolio",
-    tag: "RAG · Assessment · This Site",
-    description:
-      "Document-agnostic RAG system with heading-aware chunking, Gemini embeddings, cosine similarity retrieval with evidence gating, and Groq/Gemini LLM fallback. You're using it right now.",
-    stack: ["Next.js", "TypeScript", "Gemini Embedding 2", "Groq", "Vercel"],
-  },
 ];
 
 const SKILLS = [

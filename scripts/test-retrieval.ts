@@ -269,6 +269,9 @@ async function runTests(): Promise<void> {
         pass: false,
       });
     }
+
+    // Gentle delay to avoid burst rate limits on free-tier APIs
+    await new Promise((r) => setTimeout(r, 500));
   }
 
   // Print detailed results

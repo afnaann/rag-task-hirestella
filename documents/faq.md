@@ -38,10 +38,7 @@ Afnan's primary languages are Python and Node.js/TypeScript. Afnan also has prof
 
 ## What is Afnan's experience with RAG systems?
 
-Afnan has built production RAG systems at multiple scales:
-
-- At Wiral AI: engineered a knowledge-base ingestion pipeline with hybrid keyword and vector retrieval using Qdrant, tenant-level data isolation, and integration with a multi-agent LangGraph system. The RAG tool is called autonomously by the Enquiry Agent.
-- In the current portfolio assessment: built a document-agnostic RAG pipeline using Gemini Embedding 2, heading-aware Markdown chunking, cosine similarity retrieval with evidence gating, and provider fallback (Groq primary, Gemini fallback).
+At Wiral AI, Afnan engineered a production knowledge-base ingestion pipeline with hybrid keyword and vector retrieval using Qdrant, tenant-level data isolation, and integration with a multi-agent LangGraph system. The RAG tool is called autonomously by the Enquiry Agent for grounded customer support and sales workflows.
 
 ## What is Afnan's experience with multi-agent systems?
 
@@ -55,7 +52,6 @@ At WebMavericks Softcoders, Afnan built and optimized 50+ Apache Airflow ETL pip
 
 - **AWS** — S3, Redshift, ECR, ECS (ETL platform at WebMavericks)
 - **Azure** — Azure VMs, Docker deployments across dev/UAT/production (Wiral AI)
-- **Google Cloud** — Gemini API for embeddings and LLM generation (portfolio project)
 
 ## What databases has Afnan used?
 
